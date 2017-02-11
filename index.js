@@ -4,13 +4,13 @@
  * @param {Number} key
  * @constructor
  */
-var LListItem = function (key) {
+function LListItem(key) {
 
     this.key = (key) ? key : 0;
     this.prev = null;
     this.next = null;
 
-};
+}
 
 /**
  * Object that represents a linked list
@@ -18,11 +18,34 @@ var LListItem = function (key) {
  * @param {string} name
  * @constructor
  */
-var LList = function (name) {
+function LList(name) {
 
     this.name = (name) ? name : '';
     this.firstItem = null;
     this.lastItem = null;
+
+}
+
+LList.prototype.print = function () {
+    var self = this;
+    var str = '----------\nList: ' + self.name + '\n';
+
+    str += 'Items: ';
+
+    var curr = this.firstItem;
+
+    while (curr) {
+        if (curr.next) {
+            str += ' ' + curr.key + ', ';
+        } else {
+            str += ' ' + curr.key;
+        }
+        curr = curr.next;
+    }
+
+    str += '\n----------\n';
+
+    return str;
 
 };
 
@@ -58,11 +81,13 @@ function insert (list, item) {
 }
 
 var listA = new LList('List A');
-var keysToInsert = [1,2,3,4,5,6,7];
+var keysToInsert = [1,2,3, 8, 92,3,3332];
 
 keysToInsert.forEach(function (key) {
     insert(listA, new LListItem(key));
 });
+
+console.log(listA.print());
 
 
 
